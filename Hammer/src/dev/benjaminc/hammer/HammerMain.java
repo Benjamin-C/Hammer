@@ -7,7 +7,6 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -16,41 +15,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class HammerMain extends JavaPlugin {
 	
-	public List<String> worlds;
-	
-	private FileConfiguration cfg = this.getConfig();
-	
 	protected boolean DEBUG = true;
-	
-	protected int woodaxe_woodMax = 16;
-	protected int woodaxe_stoneMax = 24;
-	protected int woodaxe_ironMax = 32;
-	protected int woodaxe_goldMax = 32;
-	protected int woodaxe_diamondMax = 48; 
-	protected int woodaxe_nethariteMax = 64;
 	
 	/**
 	 * Fired with the plugin is enabled
 	 */
     @Override
     public void onEnable() {
-    	getServer().getPluginManager().registerEvents(new HammerEvent(this), this);
+    	getServer().getPluginManager().registerEvents(new HammerEvent(), this);
     	Bukkit.broadcastMessage("Hammers loaded");
     	Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> Bukkit.broadcastMessage("Hammers loadead a moment ago. Bang bang."), 1);
     	addCraftings();
-    	
-    	cfg = getConfig();
-    	saveDefaultConfig();
-    	
-    	woodaxe_woodMax = cfg.getInt(Keys.CONFIG_WOODAXE_WOOD_MAX);
-    	woodaxe_stoneMax  = cfg.getInt(Keys.CONFIG_WOODAXE_STONE_MAX);
-    	woodaxe_ironMax  = cfg.getInt(Keys.CONFIG_WOODAXE_IRON_MAX);
-    	woodaxe_goldMax  = cfg.getInt(Keys.CONFIG_WOODAXE_GOLD_MAX);
-    	woodaxe_diamondMax  = cfg.getInt(Keys.CONFIG_WOODAXE_DIAMOND_MAX);
-    	woodaxe_nethariteMax = cfg.getInt(Keys.CONFIG_WOODAXE_NETHERITE_MAX);
-
-//    	getCommand(Keys.COMMAND_WS).setExecutor(new WSCommand(this));
-//    	getCommand(Keys.COMMAND_WS).setTabCompleter(new WSCommandTabComplete(this));
     }
     
     /*
@@ -59,8 +34,6 @@ public class HammerMain extends JavaPlugin {
     @Override
     public void onDisable() {
     	Bukkit.broadcastMessage("Hammers unloaded");
-//    	cfg.set(Keys.CONFIG_WORLDS, worlds);
-//    	saveConfig();
     }
     
     private static final String TOOL_MATERIALS[] = {"WOODEN", "STONE", "GOLDEN", "IRON", "DIAMOND", "NETHERITE"};
@@ -73,13 +46,12 @@ public class HammerMain extends JavaPlugin {
 	
     public void addCraftings() {
     	for(String s : TOOL_MATERIALS) {
-    		addHammerCrafting(Material.valueOf(s + "_PICKAXE"), ToolType.HAMMER);
-    		addHammerCrafting(Material.valueOf(s + "_SHOVEL"), ToolType.EXCAVATOR);
-    		addHammerCrafting(Material.valueOf(s + "_AXE"), ToolType.WOODAXE);
+    		addToolCrafting(Material.valueOf(s + "_PICKAXE"), ToolType.HAMMER);
+    		addToolCrafting(Material.valueOf(s + "_SHOVEL"), ToolType.EXCAVATOR);
     	}
     }
     
-    public void addHammerCrafting(Material mat, ToolType type) {
+    public void addToolCrafting(Material mat, ToolType type) {
     	String matname = mat.toString();
     	matname = matname.substring(0, matname.indexOf("_")).toLowerCase();
     	String name = matname.substring(0, 1).toUpperCase() + matname.substring(1);

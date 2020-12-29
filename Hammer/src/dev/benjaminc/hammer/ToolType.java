@@ -2,8 +2,7 @@ package dev.benjaminc.hammer;
 
 public enum ToolType {
 	HAMMER("Hammer", "Not every tool's a hammer"),
-	EXCAVATOR("Excavator", "Not your fluffy CAT"),
-	WOODAXE("Woodaxe", "Chop chop!");
+	EXCAVATOR("Excavator", "Not your fluffy CAT");
 	
 	private String suffix;
 	private String lore;
