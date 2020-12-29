@@ -2,19 +2,3 @@ name: Hammer
 main: dev.benjaminc.hammer.HammerMain
 version: 1.0
 api-version: 1.16
-commands:
-  worldselector:
-    description: Changes worlds
-    usage: /worldselector
-permissions:
-  worldselector.*:
-    description: Gives access to all WC features
-    children:
-      worldselector.change: true
-      worldselector.control: true
-  worldselector.change:
-    description: Allows players to select the world
-    default: op
-  worldselector.control:
-    description: Allows players to control the new world generation and world removal
-    default: op
