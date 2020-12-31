@@ -67,7 +67,7 @@ public class HammerEvent implements Listener{
 									Block bld = b.getWorld().getBlockAt(bl);
 									if(!bld.getDrops(tool).isEmpty()) {
 										if(g != GameMode.CREATIVE) {
-											bld.breakNaturally();
+											bld.breakNaturally(tool);
 										} else {
 											bld.setType(Material.AIR);
 										}
