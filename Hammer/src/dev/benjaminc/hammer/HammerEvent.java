@@ -76,10 +76,14 @@ public class HammerEvent implements Listener{
 							}
 						}
 					} else {
-						p.sendMessage("Face was null");
-						p.sendMessage("b:" + b);
-						p.sendMessage("l:" + l);
-						p.sendMessage("p:" + p);
+						p.sendMessage("Something messed up when trying to break that block. "
+								+ "You can try standing somewhere else, or using a different pick. "
+								+ "Please do not report this as an error.");
+//						p.sendMessage("THIS IS A DEBUG MESSAGE. PLEASE DO NOT REPORT IT AS AN ERROR");
+//						p.sendMessage("Face was null");
+//						p.sendMessage("b:" + b);
+//						p.sendMessage("l:" + l);
+//						p.sendMessage("p:" + p);
 					}
 				}
 			}
